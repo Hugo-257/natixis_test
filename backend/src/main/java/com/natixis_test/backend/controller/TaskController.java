@@ -14,7 +14,7 @@ import java.util.List;
 public class TaskController {
 
     /**
-     * Pour appel endpoint { GET , /getAllTasks} et retourne toutes les tâches enregistrées.
+     * Pour appel endpoint { GET , /getAllTasks.
      *
      * @return Toutes les tâches enregistrées avec status:<br>
      * -<b>200</b> : si la liste n'est pas vide.<br>
@@ -35,7 +35,7 @@ public class TaskController {
     }
 
     /**
-     * Pour appel endpoint { GET , /getAllTasks} et retourne toutes les tâches à faire.
+     * Pour appel endpoint { GET , /getAllTasks}.
      *
      * @return Toutes les tâches à faire avec comme status code:<br>
      * -<b>200</b> : si la liste n'est pas vide.<br>
@@ -56,7 +56,7 @@ public class TaskController {
     }
 
     /**
-     * Pour appel endpoint { GET , /getTaskById/{id}}  et retourne une tâche correspondant à l'id.
+     * Pour appel endpoint { GET , /getTaskById/{id}}.
      *
      * @param id L'identifiant de la tâche.
      * @return -La tâche correspondant à l'id trouvé avec status 200.<br>
@@ -78,7 +78,7 @@ public class TaskController {
 
 
     /**
-     * Pour appel endpoint { GET , /getTaskById/{id}}  et retourne une tâche correspondant à l'id.
+     * Pour appel endpoint { GET , /getTaskById/{id}}.
      *
      * @param id   identifiant de la tâche.
      * @param body body du request.
@@ -102,7 +102,7 @@ public class TaskController {
     }
 
     /**
-     * Pour appel 'endpoint {POST , /addTask} .Elle ajoute une tâche à la liste de tâches.
+     * Pour appel endpoint {POST , /addTask}.
      *
      * @return -La tâche ajoutée avec status code 201.<br>
      * -Une réponse avec status 500 s'il y a une erreur au cours de l'exécution.
@@ -110,8 +110,8 @@ public class TaskController {
     @PostMapping("/addTask")
     public ResponseEntity<?> addTask(@RequestBody Task task) {
         try {
-            task.setId(Task.allTasks.size());
-            Task.allTasks.add(task);
+            task.setId(Task.ALL_TASKS.size());
+            Task.ALL_TASKS.add(task);
             return new ResponseEntity<>(task, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(new ErrorParser(ErrorParser.DEFAULT_ERROR_MESSAGE), HttpStatus.INTERNAL_SERVER_ERROR);

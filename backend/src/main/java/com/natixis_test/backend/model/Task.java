@@ -9,12 +9,11 @@ import java.util.List;
 
 @Getter @Setter @NoArgsConstructor
 public class Task {
-    public static List<Task> allTasks = new ArrayList<>();
+    public static List<Task> ALL_TASKS = new ArrayList<>();
     public static boolean initializedStarter = false;
     private int id;
     private String label;
     private Boolean status;
-
 
 
     public Task(String label, Boolean status) {
@@ -28,8 +27,8 @@ public class Task {
             FactoryTasks f = new FactoryTasks();
             List<Task> templates = f.getStarterTasks(4);
             for (Task task : templates) {
-                task.setId(Task.allTasks.size());
-                Task.allTasks.add(task);
+                task.setId(Task.ALL_TASKS.size());
+                Task.ALL_TASKS.add(task);
                 Task.initializedStarter = true;
             }
         }
@@ -38,22 +37,22 @@ public class Task {
     public static void reinitialize(){
         FactoryTasks f = new FactoryTasks();
         List<Task> templates = f.getStarterTasks(4);
-        Task.allTasks=new ArrayList<>();
+        Task.ALL_TASKS=new ArrayList<>();
         for (Task task : templates) {
-            task.setId(Task.allTasks.size());
-            Task.allTasks.add(task);
+            task.setId(Task.ALL_TASKS.size());
+            Task.ALL_TASKS.add(task);
         }
     }
 
     public static List<Task> getAllTasks() {
         checkIfInitialized();
-        return allTasks;
+        return Task.ALL_TASKS;
     }
 
     public static List<Task> getAllUndoneTasks() {
         checkIfInitialized();
         List<Task> res = new ArrayList<>();
-        for (Task t : allTasks) {
+        for (Task t : Task.ALL_TASKS) {
             if (!t.status)
                 res.add(t);
         }
